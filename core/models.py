@@ -1,5 +1,7 @@
 from django.db import models
+
 from core.utils import generate_id
+
 
 class BaseModel(models.Model):
     id = models.CharField(primary_key=True, max_length=100, default=generate_id, editable=False)

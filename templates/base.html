@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Guestbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'output.css' %}">
+</head>
+
+<body class="bg-base-200 text-base-content font-sans min-h-screen flex flex-col">
+
+  <header class="bg-base-100 shadow-xs">
+    {% include "header.html" %}
+  </header>
+
+  <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-6">
+    <div class="messages space-y-2 mb-6">
+      {% for message in messages %}
+      <div
+        class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-error{% else %}alert-info{% endif %}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer class="bg-base-100 text-sm text-center py-4 border-t">
+    {% include "footer.html" %}
+  </footer>
+
+</body>
+
+</html>

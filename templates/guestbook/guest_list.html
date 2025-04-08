@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+  <h2 class="text-2xl font-semibold">📋 Daftar Tamu</h2>
+  <a href="{% url 'guestbook:create' %}"
+    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition">
+    + Tambah Tamu
+  </a>
+</div>
+
+<div class="overflow-x-auto">
+  <table class="min-w-full text-sm text-left border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+    <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
+      <tr>
+        <th class="px-4 py-3">Nama</th>
+        <th class="px-4 py-3">Instansi</th>
+        <th class="px-4 py-3">Keperluan</th>
+        <th class="px-4 py-3">Tanggal Kunjungan</th>
+        <th class="px-4 py-3">Aksi</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      {% for guest in guests %}
+      <tr class="hover:bg-gray-50">
+        <td class="px-4 py-3 text-black">{{ guest.name }}</td>
+        <td class="px-4 py-3 text-black">{{ guest.institution }}</td>
+        <td class="px-4 py-3 text-black">{{ guest.purpose }}</td>
+        <td class="px-4 py-3 text-black">{{ guest.visit_date }}</td>
+        <td class="px-4 py-3 space-x-2">
+          <a href="{% url 'guestbook:update' guest.id %}" class="text-blue-600 hover:underline">✏️ Edit</a>
+          <a href="{% url 'guestbook:delete' guest.id %}" onclick="return confirm('Yakin ingin menghapus?')"
+            class="text-red-600 hover:underline">❌ Hapus</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" class="px-4 py-6 text-center text-gray-500">Belum ada tamu.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

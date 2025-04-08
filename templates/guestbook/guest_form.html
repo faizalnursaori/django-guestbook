@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-semibold mb-6">
+  {% if guest %}✏️ Edit Tamu{% else %}➕ Tambah Tamu Baru{% endif %}
+</h2>
+
+<form method="post" class="space-y-5">
+  {% csrf_token %}
+
+  <div>
+    <label for="name" class="block font-medium mb-1">Nama</label>
+    <input type="text" name="name" value="{{ guest.name }}"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      required>
+  </div>
+
+  <div>
+    <label for="institution" class="block font-medium mb-1">Instansi</label>
+    <input type="text" name="institution" value="{{ guest.institution }}"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      required>
+  </div>
+
+  <div>
+    <label for="purpose" class="block font-medium mb-1">Keperluan</label>
+    <textarea name="purpose" rows="4"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      required>{{ guest.purpose }}</textarea>
+  </div>
+
+  <div class="flex items-center space-x-4 pt-4">
+    <button type="submit"
+      class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition">
+      💾 Simpan
+    </button>
+    <a href="{% url 'guestbook:list' %}" class="text-gray-600 hover:underline">
+      Batal
+    </a>
+  </div>
+</form>
+{% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
+
 from core.models import BaseModel
 from core.utils import generate_id
+
 
 # Create your models here.
 class Guest(BaseModel):
