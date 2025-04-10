@@ -6,7 +6,9 @@ from core.utils import generate_id
 
 # Create your models here.
 class Guest(BaseModel):
-    id = models.CharField(primary_key=True, max_length=100, default=generate_id, editable=False)
+    id = models.CharField(
+        primary_key=True, max_length=100, default=generate_id, editable=False
+    )
     name = models.CharField(max_length=100)
     institution = models.CharField(max_length=100)
     purpose = models.TextField()
